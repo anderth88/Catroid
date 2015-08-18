@@ -23,7 +23,6 @@
 package org.catrobat.catroid.drone;
 
 import org.catrobat.catroid.content.bricks.BrickBaseType;
-import org.catrobat.catroid.content.bricks.DroneAdvancedConfigBrick;
 import org.catrobat.catroid.content.bricks.DroneEmergencyBrick;
 import org.catrobat.catroid.content.bricks.DroneFlipBrick;
 import org.catrobat.catroid.content.bricks.DroneMoveBackwardBrick;
@@ -33,7 +32,6 @@ import org.catrobat.catroid.content.bricks.DroneMoveLeftBrick;
 import org.catrobat.catroid.content.bricks.DroneMoveRightBrick;
 import org.catrobat.catroid.content.bricks.DroneMoveUpBrick;
 import org.catrobat.catroid.content.bricks.DronePlayLedAnimationBrick;
-import org.catrobat.catroid.content.bricks.DroneSetConfigBrick;
 import org.catrobat.catroid.content.bricks.DroneSwitchCameraBrick;
 import org.catrobat.catroid.content.bricks.DroneTakeOffLandBrick;
 import org.catrobat.catroid.content.bricks.DroneToggleVideoBrick;
@@ -58,10 +56,8 @@ public final class DroneBrickFactory {
 		DRONE_MOVE_FORWARD_BRICK,
 		DRONE_TURN_RIGHT_BRICK,
 		DRONE_TURN_LEFT_BRICK,
-		DRONE_SET_CONFIG_BRICK,
 		DRONE_TOGGLE_VIDEO_BRICK,
 		DRONE_SWITCH_CAMERA_BRICK,
-		DRONE_ADVANCED_CONFIG_BRICK
 	}
 
 	public static BrickBaseType getInstanceOfDroneBrick(DroneBricks brick, int timeInMilliseconds,
@@ -101,17 +97,11 @@ public final class DroneBrickFactory {
 			case DRONE_TURN_RIGHT_BRICK:
 				return new DroneTurnRightBrick(timeInMilliseconds, powerInPercent);
 
-			case DRONE_SET_CONFIG_BRICK:
-				return new DroneSetConfigBrick();
-
 			case DRONE_TOGGLE_VIDEO_BRICK:
 				return new DroneToggleVideoBrick();
 
 			case DRONE_SWITCH_CAMERA_BRICK:
 				return new DroneSwitchCameraBrick();
-
-			case DRONE_ADVANCED_CONFIG_BRICK:
-				return new DroneAdvancedConfigBrick();
 
 			case DRONE_GO_EMERGENCY:
 				return new DroneEmergencyBrick();

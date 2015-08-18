@@ -64,7 +64,6 @@ import org.catrobat.catroid.content.bricks.ChangeYByNBrick;
 import org.catrobat.catroid.content.bricks.ClearGraphicEffectBrick;
 import org.catrobat.catroid.content.bricks.ComeToFrontBrick;
 import org.catrobat.catroid.content.bricks.DeleteItemOfUserListBrick;
-import org.catrobat.catroid.content.bricks.DroneAdvancedConfigBrick;
 import org.catrobat.catroid.content.bricks.DroneEmergencyBrick;
 import org.catrobat.catroid.content.bricks.DroneFlipBrick;
 import org.catrobat.catroid.content.bricks.DroneMoveBackwardBrick;
@@ -74,7 +73,6 @@ import org.catrobat.catroid.content.bricks.DroneMoveLeftBrick;
 import org.catrobat.catroid.content.bricks.DroneMoveRightBrick;
 import org.catrobat.catroid.content.bricks.DroneMoveUpBrick;
 import org.catrobat.catroid.content.bricks.DronePlayLedAnimationBrick;
-import org.catrobat.catroid.content.bricks.DroneSetConfigBrick;
 import org.catrobat.catroid.content.bricks.DroneSwitchCameraBrick;
 import org.catrobat.catroid.content.bricks.DroneTakeOffLandBrick;
 import org.catrobat.catroid.content.bricks.DroneToggleVideoBrick;
@@ -160,6 +158,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import static junit.framework.Assert.assertTrue;
 import static junit.framework.Assert.fail;
+
 import static org.catrobat.catroid.common.Constants.BACKPACK_DIRECTORY;
 import static org.catrobat.catroid.common.Constants.BACKPACK_IMAGE_DIRECTORY;
 import static org.catrobat.catroid.common.Constants.BACKPACK_SOUND_DIRECTORY;
@@ -323,12 +322,10 @@ public final class StorageHandler {
 		xstream.alias("brick", DroneMoveDownBrick.class);
 		xstream.alias("brick", DroneMoveLeftBrick.class);
 		xstream.alias("brick", DroneMoveRightBrick.class);
-		xstream.alias("brick", DroneSetConfigBrick.class);
 		xstream.alias("brick", DroneTurnLeftBrick.class);
 		xstream.alias("brick", DroneTurnRightBrick.class);
 		xstream.alias("brick", DroneSwitchCameraBrick.class);
 		xstream.alias("brick", DroneToggleVideoBrick.class);
-		xstream.alias("brick", DroneAdvancedConfigBrick.class);
 		xstream.alias("brick", DroneEmergencyBrick.class);
 
 		xstream.alias("brick", PhiroMotorMoveBackwardBrick.class);
@@ -418,10 +415,8 @@ public final class StorageHandler {
 			return false;
 		}
 
-		Log.d(TAG, "saveProject " + project.getName());
-
 		boolean result = codeFileSanityCheck(project.getName());
-		assertTrue(result);
+//		assertTrue("codeFileSanityCheck is false but should be true!", result);
 
 		loadSaveLock.lock();
 
@@ -434,7 +429,7 @@ public final class StorageHandler {
 			tmpCodeFile = new File(buildProjectPath(project.getName()), PROJECTCODE_NAME_TMP);
 			currentCodeFile = new File(buildProjectPath(project.getName()), PROJECTCODE_NAME);
 
-			if(tmpCodeFile == null || currentCodeFile == null){
+			if (tmpCodeFile == null || currentCodeFile == null) {
 				Log.d(TAG, "tmpCodeFile or currentCodeFile is null!");
 				return false;
 			}
@@ -508,7 +503,9 @@ public final class StorageHandler {
 
 					if (!tmpCodeFile.delete()) {
 						Log.e(TAG, "Could not delete " + tmpCodeFile.getName());
+//						fail("Could not delete " + tmpCodeFile.getName());
 					}
+//					fail("TMP File probably corrupted. Both files exist. Discard " + tmpCodeFile.getName());
 					return false;
 				}
 
@@ -517,6 +514,7 @@ public final class StorageHandler {
 
 				if (!tmpCodeFile.renameTo(currentCodeFile)) {
 					Log.e(TAG, "Could not rename " + tmpCodeFile.getName());
+//					fail("Could not rename " + tmpCodeFile.getName());
 					return false;
 				}
 			}
