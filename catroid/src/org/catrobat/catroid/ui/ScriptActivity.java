@@ -42,11 +42,13 @@ import com.actionbarsherlock.view.MenuItem;
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.content.BroadcastHandler;
-import org.catrobat.catroid.drone.DroneInitializer;
+import org.catrobat.catroid.drone.DroneServiceWrapper;
+import org.catrobat.catroid.drone.DroneStageActivity;
 import org.catrobat.catroid.stage.PreStageActivity;
 import org.catrobat.catroid.stage.StageActivity;
 import org.catrobat.catroid.ui.adapter.BrickAdapter;
 import org.catrobat.catroid.ui.adapter.ScriptActivityAdapterInterface;
+import org.catrobat.catroid.ui.controller.LookController;
 import org.catrobat.catroid.ui.dragndrop.DragAndDropListView;
 import org.catrobat.catroid.ui.fragment.FormulaEditorDataFragment;
 import org.catrobat.catroid.ui.fragment.FormulaEditorFragment;
@@ -98,6 +100,7 @@ public class ScriptActivity extends BaseActivity {
 	private boolean isLookFragmentHandleAddButtonHandled = false;
 
 	private ImageButton buttonAdd;
+	private boolean switchToScriptFragment;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -124,6 +127,10 @@ public class ScriptActivity extends BaseActivity {
 
 		buttonAdd = (ImageButton) findViewById(R.id.button_add);
 		updateHandleAddButtonClickListener();
+		if (switchToScriptFragment) {
+			LookController.getInstance().switchToScriptFragment(lookFragment, this);
+			switchToScriptFragment = false;
+		}
 	}
 
 	private void setupBottomBar() {
@@ -293,8 +300,12 @@ public class ScriptActivity extends BaseActivity {
 		updateHandleAddButtonClickListener();
 
 		if (requestCode == PreStageActivity.REQUEST_RESOURCES_INIT && resultCode == RESULT_OK) {
-			Intent intent = new Intent(ScriptActivity.this, StageActivity.class);
-			DroneInitializer.addDroneSupportExtraToNewIntentIfPresentInOldIntent(data, intent);
+			Intent intent;
+			if (DroneServiceWrapper.checkARDroneAvailability()) {
+				intent = new Intent(ScriptActivity.this, DroneStageActivity.class);
+			} else {
+				intent = new Intent(ScriptActivity.this, StageActivity.class);
+			}
 			startActivity(intent);
 		}
 	}
@@ -581,5 +592,9 @@ public class ScriptActivity extends BaseActivity {
 
 		updateHandleAddButtonClickListener();
 		fragmentTransaction.commit();
+	}
+
+	public void setSwitchToScriptFragment(boolean switchToScriptFragment) {
+		this.switchToScriptFragment = switchToScriptFragment;
 	}
 }

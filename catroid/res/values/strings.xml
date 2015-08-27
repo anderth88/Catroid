@@ -80,6 +80,7 @@
     <string name="preference_title_enable_mindstorms_nxt_bricks">Lego Mindstorms NXT bricks</string>
     <string name="preference_description_mindstorms_nxt_bricks">Allow to control Lego Mindstorms NXT robots</string>
     <string name="preference_title_mindstorms_nxt_sensors">Lego NXT sensors</string>
+    <string name="preference_title_drone_config_properties">Drone config properties</string>
     <string name="preference_title_use_face_detection">Face Detection</string>
     <string name="preference_description_use_face_detection">Allow to detect faces</string>
     <string name="preference_title_select_camera">Choose Camera</string>
@@ -90,7 +91,6 @@
     <!--  -->
 
 
-
     <!-- New Object Dialog -->
     <string name="dialog_new_object_pocketpaint">Draw Image</string>
     <string name="dialog_new_object_gallery">Select Image</string>
@@ -99,6 +99,7 @@
     <string name="dialog_new_object_name">Object name</string>
     <string name="dialog_new_object_switch_title">New Object created</string>
     <string name="dialog_new_object_switch_message">Switch to new Object?</string>
+    <string name="dialog_new_object_drone_video">Drone Video</string>
     <!--  -->
 
 
@@ -109,9 +110,10 @@
     must agree to our Terms of Use and strictly follow them when you use Pocket 
     Code and our other executables. Please see the link below for their precise formulation.\n</string>
     <string name="dialog_terms_of_use_link_text">Terms of Use</string>
-    <string name="dialog_terms_of_use_agree_permanent">I agree permanently – do not ask me again. I assume full responsibility when someone else uses my device.</string>
-    <string name="dialog_terms_of_use_agree">I agree</string>
-    <string name="dialog_terms_of_use_do_not_agree">I do not agree</string>
+    <string name="dialog_terms_of_use_agree_permanent">Unused</string>
+    <string name="dialog_terms_of_use_link_text_parrot_reminder">Pocket Code Terms of Use</string>
+    <string name="dialog_terms_of_use_parrot_reminder_text">You attempt to use Pocket Code together with Parrot\'s AR.Drone. We strongly remind you to abide to Parrot\'s Terms of Use for the drone and to Catrobat\'s Terms of Use for Pocket Code.</string>
+    <string name="dialog_terms_of_use_parrot_reminder_do_not_remind_again">Do not remind me again.</string>
     <!--  -->
 
 
@@ -263,7 +265,7 @@
     <string name="brick_context_dialog_copy_brick">Copy Brick</string>
     <string name="brick_context_dialog_animate_bricks">Animate Brick-Parts</string>
     <string name="brick_context_dialog_add_to_script">Add To Script</string>
-	<string name="brick_context_dialog_edit_brick">Edit Brick</string>
+    <string name="brick_context_dialog_edit_brick">Edit Brick</string>
     <string name="brick_context_dialog_formula_edit_brick">Edit Formula</string>
     <string name="brick_context_dialog_delete_script">Delete Script</string>
     <!--  -->
@@ -277,6 +279,7 @@
     <string name="add_look_media_library">Media Library</string>
     <string name="new_look_name">Look Name:</string>
     <string name="look_rename_overwrite">Look Name already exists !</string>
+    <string name="add_look_drone_video">Drone video</string>
     <!--  -->
 
     <!-- New Sound dialog -->
@@ -491,8 +494,7 @@
     <string name="default_drone_project_sprites_takeoff">Take off</string>
 
     <!-- <string name="default_drone_project_sprites_blink_led">Blink led</string> -->
-    <string name="default_drone_project_srpites_land">Land</string>
-    <string name="default_drone_project_srpites_rotate">Rotate</string>
+    <string name="default_drone_project_sprites_rotate">Rotate</string>
     <string name="default_drone_project_sprites_up">Up</string>
     <string name="default_drone_project_sprites_down">Down</string>n
     <string name="default_drone_project_sprites_left">Left</string>
@@ -501,8 +503,40 @@
     <string name="default_drone_project_sprites_back">Back</string>
     <string name="default_drone_project_sprites_turn_left">Turn left</string>
     <string name="default_drone_project_sprites_turn_right">Turn right</string>
+    <string name="default_drone_project_sprites_emergency">Emergency</string>
+    <string name="drone_brick_set_text">Text</string>
+    <string name="drone_brick_set_x">X:</string>
     <!--  -->
 
+    <!-- Drone config spinner values  -->
+    <string name="drone_config_indoor_with_hull">indoor with hull</string>
+    <string name="drone_config_indoor_without_hull">indoor without hull</string>
+    <string name="drone_config_outdoor_with_hull">outdoor with hull</string>
+    <string name="drone_config_outdoor_without_hull">outdoor without hull</string>
+
+    <!-- Drone altitude limit values  -->
+    <string name="drone_set_altitude_max_3m">3 meters</string>
+    <string name="drone_set_altitude_max_5m">5 meters</string>
+    <string name="drone_set_altitude_max_10m">10 meters</string>
+    <string name="drone_set_altitude_max_100m">100 meters</string>
+
+    <!-- Drone max vertical speed limit values  -->
+    <string name="drone_set_vertical_min">200 mm/s</string>
+    <string name="drone_set_vertical_indoor">700 mm/s</string>
+    <string name="drone_set_vertical_outdoor">1000 mm/s</string>
+    <string name="drone_set_vertical_max">2000 mm/s</string>
+
+    <!-- Drone max rotation speed limit values  -->
+    <string name="drone_set_rotation_min">40 °/s</string>
+    <string name="drone_set_rotation_indoor">100 °/s</string>
+    <string name="drone_set_rotation_outdoor">200 °/s</string>
+    <string name="drone_set_rotation_max">350 °/s</string>
+
+    <!-- Drone max tilt limit values  -->
+    <string name="drone_set_tilt_min">5 °</string>
+    <string name="drone_set_tilt_indoor">12 °</string>
+    <string name="drone_set_tilt_outdoor">20 ° </string>
+    <string name="drone_set_tilt_max">30 °</string>
 
     <!-- Notifications -->
     <string name="notification_invalid_text_entered">Please enter a value</string>
@@ -522,12 +556,21 @@
     <string name="notification_download_pending">Download in progress</string>
     <string name="notification_download_finished">Download successful</string>
     <string name="notification_title_open">"Open "</string>
+    <string name="notification_low_battery">Attention. Battery is low. Current Status =</string>
     <string name="project_rename">(Your program will be renamed.)</string>
     <string name="size_of_project">Size:</string>
     <string name="upload_button">Upload</string>
     <string name="upload_project_dialog_title">Upload program</string>
     <string name="upload_description">Description:</string>
-
+    <string name="drone_emergency_battery_low">Battery is low (automatic landing).</string>
+    <string name="drone_emergency_camera">One or more camera(s) is not responding.</string>
+    <string name="drone_emergency_ultrasound">Ultrasound sensor is not responding.</string>
+    <string name="drone_emergency_angle">AR.Drone euler angles went too high. Motors shutdown to prevent bad behaviors.</string>
+    <string name="drone_emergency_cutout">One or more motor(s) was stopped by environment.</string>
+    <string name="drone_alert_battery_low">Battery is too low to take-off again.</string>
+    <string name="drone_alert_ultrasound">Ultrasound sensor can\'t determine AR.Drone altitude.</string>
+    <string name="drone_alert_vision">No speed estimation from bottom facing camera.</string>
+    <string name="drone_emergency_title">Emergency</string>
     <!--  -->
 
 
@@ -559,7 +602,7 @@
     <string name="error_drone_low_battery">Insert a charged battery and try again.</string>
     <string name="error_drone_wrong_platform_title">No ARDrone support</string>
     <string name="error_drone_wrong_platform">We can not run a ARDrone project on your device.</string>
-	<string name="error_rename_incompatible_project">Renaming an incompatible project isn\'t possible.</string>
+    <string name="error_rename_incompatible_project">Renaming an incompatible project isn\'t possible.</string>
     <string name="error_changing_description_of_incompatible_project">Changing the description of an incompatible project isn\'t possible.</string>
     <string name="error_unknown_error">An unknown error occurred.</string>
     <!--  -->
@@ -615,6 +658,7 @@
     <string name="preference_disable_nxt_info_dialog">Disable Info Dialog</string>
     <string name="preference_disable_nxt_info_dialog_description">Program specific NXT settings are not shown when opening a program.</string>
     <string name="preference_title_mindstorms_nxt_sensors_description">The mapping of NXT sensors to ports is program specific and can only be configured for opened programs!</string>
+    <string name="preference_title_drone_properties_setting_description">The selective of drone config properties is program specific and can only be configured for opened programs!</string>
     <string name="lego_nxt_sensor_config_info_text">The current program uses Lego Mindstorms NXT bricks or sensors. For proper functionality please connect the sensors to the robot as follows</string>
     <string name="nxt_port_1">Port 1</string>
     <string name="nxt_port_2">Port 2</string>
@@ -625,8 +669,7 @@
 
 
     <!-- Drone Bricks -->
-    <string name="brick_drone_takeoff">Take off</string>
-    <string name="brick_drone_land">Land</string>
+    <string name="brick_drone_takeoff_land">Take off / Land</string>
     <string name="brick_drone_play_led_animation">Play LED animation</string>
     <string name="brick_drone_move_left">Move left</string>
     <string name="brick_drone_move_right">Move right</string>
@@ -635,14 +678,21 @@
     <string name="brick_drone_move_up">Move up</string>
     <string name="brick_drone_move_down">Move down</string>
     <string name="brick_drone_flip">Flip</string>
-    <string name="brick_drone_power">Power</string>
+    <string name="brick_drone_emergency">Emergency</string>
     <string name="brick_drone_turn_right">Turn right</string>
     <string name="brick_drone_turn_left">Turn left</string>
     <string name="brick_drone_turn_left_magneto">Turn left [angle]</string>
     <string name="brick_drone_turn_right_magneto">Turn right [angle]</string>
     <string name="brick_drone_angle">Angle</string>
-
-    <!-- <string name="brick_drone_land">Drone: land</string> -->
+    <string name="brick_drone_set_config">Set config</string>
+    <string name="brick_drone_toggle_video">Toggle video</string>
+    <string name="brick_drone_switch_camera">Switch camera</string>
+    <string name="brick_drone_set_altitude">Altitude limit</string>
+    <string name="brick_drone_set_vertical_speed">Vertical speed limit</string>
+    <string name="brick_drone_set_rotation_speed">Rotation speed limit</string>
+    <string name="brick_drone_set_tilt_limit">Tilt limit</string>
+    <string name="brick_drone_with">with</string>
+    <string name="brick_drone_percent_power">% power</string>
     <!--  -->
 
     <!-- Phiro bricks -->
@@ -708,7 +758,7 @@
     <!-- -->
 
     <!-- Formula Editor Strings -->
-    <string name="formula_editor_data" >Data</string >
+    <string name="formula_editor_data">Data</string>
     <string name="formula_editor_true">True</string>
     <string name="formula_editor_false">False</string>
     <string name="formula_editor_decimal_mark">.</string>
@@ -779,6 +829,16 @@
     <string name="formula_editor_sensor_x_inclination">inclination_x</string>
     <string name="formula_editor_sensor_y_inclination">inclination_y</string>
     <string name="formula_editor_sensor_loudness">loudness</string>
+    <string name="formula_editor_sensor_drone_battery_status">drone_battery_status</string>
+    <string name="formula_editor_sensor_drone_emergency_state">drone_emergency_state</string>
+    <string name="formula_editor_sensor_drone_flying">drone_flying</string>
+    <string name="formula_editor_sensor_drone_initialized">drone_initialized</string>
+    <string name="formula_editor_sensor_drone_usb_active">drone_usb_active</string>
+    <string name="formula_editor_sensor_drone_usb_remaining_time">drone_usb_remaining_time</string>
+    <string name="formula_editor_sensor_drone_camera_ready">drone_camera_ready</string>
+    <string name="formula_editor_sensor_drone_record_ready">drone_record_ready</string>
+    <string name="formula_editor_sensor_drone_recording">drone_recording</string>
+    <string name="formula_editor_sensor_drone_num_frames">drone_num_frames</string>
     <string name="formula_editor_sensor_lego_nxt_1">NXT_sensor_1</string>
     <string name="formula_editor_sensor_lego_nxt_2">NXT_sensor_2</string>
     <string name="formula_editor_sensor_lego_nxt_3">NXT_sensor_3</string>
@@ -861,6 +921,9 @@
  	<string name="add_line_break">Add Line Break</string>
  	<string name="edit_variable">Edit Variable</string>
  	<string name="variable_hint">Variable Name</string>
+    <string name="brick_show_text_var">Show variable</string>
+    <string name="brick_show_text_pos">"at  "</string>
+    <string name="brick_hide_text_var">Hide variable</string>
     <!-- -->
 
     <!-- User Bricks strings -->

@@ -48,6 +48,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.common.Constants;
+import org.catrobat.catroid.common.DroneVideoLookData;
 import org.catrobat.catroid.common.LookData;
 import org.catrobat.catroid.io.StorageHandler;
 import org.catrobat.catroid.ui.LookViewHolder;
@@ -217,15 +218,41 @@ public final class LookController {
 		copyImageToCatroid(originalImagePath, activity, lookDataList, fragment);
 	}
 
-	private void updateLookAdapter(String name, String fileName, ArrayList<LookData> lookDataList, LookFragment fragment) {
+	private void updateLookAdapter(String name, String fileName, ArrayList<LookData> lookDataList, LookFragment fragment, LookData.LookDataType lookDataType) {
 		name = Utils.getUniqueLookName(name);
+		LookData lookData;
 
-		LookData lookData = new LookData();
+		switch (lookDataType) {
+			case DRONE_VIDEO:
+				lookData = new DroneVideoLookData();
+				break;
+			default:
+				lookData = new LookData();
+				break;
+		}
+
 		lookData.setLookFilename(fileName);
 		lookData.setLookName(name);
 		lookDataList.add(lookData);
-
 		fragment.updateLookAdapter(lookData);
+	}
+
+	private void updateLookAdapter(String name, String fileName, ArrayList<LookData> lookDataList, LookFragment fragment) {
+
+		updateLookAdapter(name, fileName, lookDataList, fragment, LookData.LookDataType.IMAGE);
+	}
+
+	public void loadDroneVideoImageToProject(String defaultImageName, int imageId, Activity activity, ArrayList<LookData> lookDataList, LookFragment fragment) {
+		try {
+
+			File imageFile = StorageHandler.getInstance().copyImageFromResourceToCatroid(activity, imageId, defaultImageName);
+			updateLookAdapter(defaultImageName, imageFile.getName(), lookDataList, fragment, LookData.LookDataType.DRONE_VIDEO);
+		} catch (IOException e) {
+			Utils.showErrorDialog(activity, R.string.error_load_image);
+		}
+
+		fragment.destroyLoader();
+		activity.sendBroadcast(new Intent(ScriptActivity.ACTION_BRICK_LIST_CHANGED));
 	}
 
 	private void copyImageToCatroid(String originalImagePath, Activity activity, ArrayList<LookData> lookDataList,
@@ -446,14 +473,13 @@ public final class LookController {
 		activity.sendBroadcast(new Intent(ScriptActivity.ACTION_BRICK_LIST_CHANGED));
 	}
 
-	public void switchToScriptFragment(LookFragment fragment) {
-		ScriptActivity scriptActivity = (ScriptActivity) fragment.getActivity();
+	public void switchToScriptFragment(LookFragment fragment, ScriptActivity scriptActivity) {
 		scriptActivity.setCurrentFragment(ScriptActivity.FRAGMENT_SCRIPTS);
 
 		FragmentTransaction fragmentTransaction = scriptActivity.getSupportFragmentManager().beginTransaction();
 		fragmentTransaction.hide(fragment);
 		fragmentTransaction.show(scriptActivity.getSupportFragmentManager().findFragmentByTag(ScriptFragment.TAG));
-		fragmentTransaction.commit();
+		fragmentTransaction.commitAllowingStateLoss();
 
 		scriptActivity.setIsLookFragmentFromSetLookBrickNewFalse();
 		scriptActivity.setIsLookFragmentHandleAddButtonHandled(false);
